@@ -3,7 +3,7 @@ Summary:	A simple lightweight powerful embeddable programming language
 Summary(pl):	Prosty, lekki ale potê¿ny, osadzalny jêzyk programowania
 Name:		lua40
 Version:	4.0.1
-Release:	3
+Release:	4
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
@@ -11,6 +11,7 @@ Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
 Patch1:		lua-OPT.patch
 URL:		http://www.lua.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	lua
 
 %description
 Lua is a powerful, light-weight programming language designed for
@@ -41,6 +42,7 @@ Summary:	Header files for Lua
 Summary(pl):	Pliki nag³ówkowe dla Lua
 Group:		Development/Languages
 Requires:	%{name} = %{version}
+Obsoletes:	lua-devel
 
 %description devel
 Header files needed to embed Lua in C/C++ programs and docs for the
@@ -55,6 +57,7 @@ Summary:	Static Lua libraries Lua
 Summary(pl):	Biblioteki statyczne Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}
+Obsoletes:	lua-static
 
 %description static
 Static Lua libraries.
@@ -102,8 +105,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYRIGHT README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
-%dir %{_libdir}/lua
-%dir %{_datadir}/lua
 %{_mandir}/man1/*
 
 %files devel
