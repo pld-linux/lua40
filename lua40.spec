@@ -1,6 +1,7 @@
 %define _refman_version 4.0
 Summary:	A simple lightweight powerful embeddable programming language
 Summary(pl):	Prosty, lekki ale potê¿ny, osadzalny jêzyk programowania
+Summary(pt_BR):	Lua é uma linguagem de programação poderosa e leve, projetada para estender aplicações.
 Name:		lua40
 Version:	4.0.1
 Release:	7
@@ -42,6 +43,17 @@ konfiguracji, skryptów i szybkich prototypów.
 
 Ta wersja ma wkompilowan± obs³ugê ³adowania dynamicznych bibliotek.
 
+%description -l pt_BR
+Lua é uma linguagem de programação poderosa e leve, projetada para estender
+aplicações. Lua também é freqüentemente usada como uma linguagem de propósito
+geral.
+Lua combina programação procedural com poderosas construções para descrição
+de dados, baseadas em tabelas associativas e semântica extensível. Lua é
+tipada dinamicamente, interpretada a partir de bytecodes, e tem gerenciamento
+automático de memória com coleta de lixo. Essas características fazem de Lua
+uma linguagem ideal para configuração, automação (scripting) e prototipagem
+rápida.
+
 %package libs
 Summary:	lua 4.0.x libraries
 Summary(pl):	Biblioteki lua 4.0.x
@@ -56,6 +68,7 @@ Biblioteki lua 4.0.x.
 %package devel
 Summary:	Header files for Lua
 Summary(pl):	Pliki nag³ówkowe dla Lua
+Summary(pt_BR):	Arquivos de cabeçalho para a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-libs = %{version}
 Provides:	lua-devel = %{version}
@@ -69,9 +82,14 @@ language.
 Pliki nag³ówkowe potrzebne do w³±czenia Lua do programów w C/C++ oraz
 dokumentacja samego jêzyka.
 
+%description devel -l pt_BR
+Contém os arquivos de cabeçalho para desenvolvimento e
+extensão da linguagem Lua.
+
 %package static
 Summary:	Static Lua libraries Lua
 Summary(pl):	Biblioteki statyczne Lua
+Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento com a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}
 Provides:	lua-static = %{version}
@@ -82,6 +100,9 @@ Static Lua libraries.
 
 %description static -l pl
 Biblioteki statyczne Lua.
+
+%description static -l pt_BR
+Bibliotecas estáticas para desenvolvimento com a linguagem Lua
 
 %prep
 %setup -q -n lua-%{version}
