@@ -11,6 +11,7 @@ Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
 Patch1:		lua-OPT.patch
 URL:		http://www.lua.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Provides:	lua
 Obsoletes:	lua
 
 %description
@@ -42,6 +43,7 @@ Summary:	Header files for Lua
 Summary(pl):	Pliki nag³ówkowe dla Lua
 Group:		Development/Languages
 Requires:	%{name} = %{version}
+Provides:	lua-devel
 Obsoletes:	lua-devel
 
 %description devel
@@ -57,6 +59,7 @@ Summary:	Static Lua libraries Lua
 Summary(pl):	Biblioteki statyczne Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}
+Provides:	lua-static
 Obsoletes:	lua-static
 
 %description static
