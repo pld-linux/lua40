@@ -7,7 +7,9 @@ Release:	7
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
+# Source0-md5:	a31d963dbdf727f9b34eee1e0d29132c
 Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
+# Source1-md5:	5454698095c45917ce80c934066cb76c
 Patch0:		lua-link.patch
 Patch1:		lua-OPT.patch
 URL:		http://www.lua.org/
