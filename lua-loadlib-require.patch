@@ -1,7 +1,7 @@
 diff -uNr lua-orig/README.pld lua-loadlib/README.pld
 --- lua-orig/README.pld	Thu Jan  1 01:00:00 1970
-+++ lua-loadlib/README.pld	Thu Nov 15 03:35:52 2001
-@@ -0,0 +1,25 @@
++++ lua-loadlib/README.pld	Sun Dec  9 02:17:13 2001
+@@ -0,0 +1,33 @@
 +This version included in PLD distribution contains several additional
 +features compared to stock lua-4.0.
 +
@@ -27,9 +27,17 @@ diff -uNr lua-orig/README.pld lua-loadlib/README.pld
 +4. Loadlib is modified in such a way, that it also searches its file in
 +LUA_PATH. As a last resort it tries to load it in the form given on its
 +invocation, depending on libdl's search mechanisms.
++
++The second modification to loadlib() is that it now can take only one
++parameter. If there is no function name given, loadlib() constructs it from
++the library name. It throws everything after the first dot (".") (if it
++exists), prepends "lua_" and appends "open".
++
++loadlib("env.so") is therefore equivalent to loadlib("env.so","lua_envopen"),
++loadlib("env.dll") is equivalent to loadlib("env.dll","lua_envopen") etc.
 diff -uNr lua-orig/include/lua.h lua-loadlib/include/lua.h
 --- lua-orig/include/lua.h	Tue Oct 31 13:44:07 2000
-+++ lua-loadlib/include/lua.h	Thu Nov 15 03:24:17 2001
++++ lua-loadlib/include/lua.h	Sun Dec  9 01:34:23 2001
 @@ -56,6 +56,15 @@
  #define LUA_ERRMEM	4
  #define LUA_ERRERR	5
@@ -48,7 +56,7 @@ diff -uNr lua-orig/include/lua.h lua-loadlib/include/lua.h
  
 diff -uNr lua-orig/src/lib/Makefile lua-loadlib/src/lib/Makefile
 --- lua-orig/src/lib/Makefile	Wed Sep 20 04:13:52 2000
-+++ lua-loadlib/src/lib/Makefile	Thu Nov 15 01:34:40 2001
++++ lua-loadlib/src/lib/Makefile	Sun Dec  9 01:34:23 2001
 @@ -6,9 +6,10 @@
  
  # actually only used in liolib.c
@@ -64,7 +72,7 @@ diff -uNr lua-orig/src/lib/Makefile lua-loadlib/src/lib/Makefile
  
 diff -uNr lua-orig/src/lib/lbaselib.c lua-loadlib/src/lib/lbaselib.c
 --- lua-orig/src/lib/lbaselib.c	Mon Nov  6 14:45:18 2000
-+++ lua-loadlib/src/lib/lbaselib.c	Thu Nov 15 04:36:35 2001
++++ lua-loadlib/src/lib/lbaselib.c	Sun Dec  9 01:34:23 2001
 @@ -16,6 +16,7 @@
  #include "lauxlib.h"
  #include "luadebug.h"
@@ -157,8 +165,8 @@ diff -uNr lua-orig/src/lib/lbaselib.c lua-loadlib/src/lib/lbaselib.c
 +}
 diff -uNr lua-orig/src/lib/loadlib.c lua-loadlib/src/lib/loadlib.c
 --- lua-orig/src/lib/loadlib.c	Thu Aug  2 19:26:14 2001
-+++ lua-loadlib/src/lib/loadlib.c	Thu Nov 15 05:07:53 2001
-@@ -29,7 +29,7 @@
++++ lua-loadlib/src/lib/loadlib.c	Sun Dec  9 02:07:03 2001
+@@ -29,23 +29,58 @@
  int ldlib_loadlib( lua_State *L ) {
     char errmsg[256]; int n;
     HMODULE hlib; INITFUN fun;
@@ -167,8 +175,23 @@ diff -uNr lua-orig/src/lib/loadlib.c lua-loadlib/src/lib/loadlib.c
     int tag_hlib = (int) lua_tonumber(L,-2); lua_pop(L,2);
     
     n=lua_gettop(L);
-@@ -37,15 +37,38 @@
-    sfun = lua_tostring(L,2); 
+    slib = lua_tostring(L,1); 
+-   sfun = lua_tostring(L,2); 
++   if (n>1) {
++      sfun = lua_tostring(L,2); 
++   } else {
++      n = 2;
++      sfun = lua_tostring(L,1);
++      lua_pushstring(L, "lua_");
++      if (strchr(sfun,'.')) {
++	 lua_pushlstring(L, sfun, (int)strchr(sfun,'.') - (int)sfun);
++      } else {
++	 lua_pushstring(L, sfun);
++      }
++      lua_pushstring(L, "open");
++      lua_concat(L, 3);
++      sfun = lua_tostring(L, 2);
++   }
     if(n==3) x = lua_tostring(L,3); lua_pop(L,n);
  
 +   lua_getglobal(L,"LUA_PATH");
@@ -192,9 +215,7 @@ diff -uNr lua-orig/src/lib/loadlib.c lua-loadlib/src/lib/loadlib.c
 +      lua_pop(L, 1);
 +
 +      if (hlib) break;  /* ok; file done */
-+      if (*(path+l) == '\0')  /* no more directories? */
-+        luaL_verror(L, "could not load package `%.20s' from path `%.200s'",
-+                    slib, path);
++      if (*(path+l) == '\0') break; /* no more directories? */
 +      path += l+1;  /* try next directory */
 +    }
 +
@@ -210,7 +231,7 @@ diff -uNr lua-orig/src/lib/loadlib.c lua-loadlib/src/lib/loadlib.c
           lua_error(L,errmsg);
           return 0;
        }
-@@ -61,7 +84,10 @@
+@@ -61,7 +96,10 @@
     fun = (INITFUN) DLSYM(hlib,sfun);
     if( fun==NULL ) { 
        _snprintf( errmsg, sizeof(errmsg)-1, "Cannot locate function %s within plug-in library %s.", sfun, slib ); errmsg[sizeof(errmsg)-1]=0;
@@ -222,9 +243,20 @@ diff -uNr lua-orig/src/lib/loadlib.c lua-loadlib/src/lib/loadlib.c
        lua_error(L,errmsg);
        return 0;
     }
+diff -uNr lua-orig/src/lib/loadlib.h lua-loadlib/src/lib/loadlib.h
+--- lua-orig/src/lib/loadlib.h	Thu Aug  2 19:24:22 2001
++++ lua-loadlib/src/lib/loadlib.h	Sun Dec  9 02:06:24 2001
+@@ -18,6 +18,7 @@
+ /* ==================================================== */
+ #include <stdlib.h>
+ #include <stdio.h>
++#include <string.h>
+ /* ==================================================== */
+ #include "lua.h"
+ /* ==================================================== */
 diff -uNr lua-orig/src/lua/Makefile lua-loadlib/src/lua/Makefile
 --- lua-orig/src/lua/Makefile	Fri Mar 31 15:52:56 2000
-+++ lua-loadlib/src/lua/Makefile	Thu Nov 15 01:34:40 2001
++++ lua-loadlib/src/lua/Makefile	Sun Dec  9 01:34:23 2001
 @@ -14,7 +14,7 @@
  all: $T
  
