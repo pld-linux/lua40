@@ -3,7 +3,7 @@ Summary:	A simple lightweight powerful embeddable programming language
 Summary(pl):	Prosty, lekki ale potê¿ny, osadzalny jêzyk programowania
 Name:		lua
 Version:	4.0.1
-Release:	1
+Release:	2
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/%{name}-%{version}.tar.gz
@@ -66,7 +66,7 @@ Biblioteki statyczne Lua.
 %setup -q 
 cp -f %{SOURCE1} refman.ps.gz
 
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
 
 %build
@@ -86,6 +86,9 @@ install -d $RPM_BUILD_ROOT{%{_libdir}/lua,%{_datadir}/lua}
 	INSTALL_LIB=$RPM_BUILD_ROOT%{_libdir} \
 	INSTALL_MAN=$RPM_BUILD_ROOT%{_mandir}/man1
 
+rm $RPM_BUILD_ROOT%{_libdir}/lib*.so
+ln -s liblua.so.4.0 $RPM_BUILD_ROOT%{_libdir}/liblua.so
+ln -s liblualib.so.4.0 $RPM_BUILD_ROOT%{_libdir}/liblualib.so
 rm -f doc/*.1
 
 %clean
@@ -98,7 +101,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYRIGHT README
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 %dir %{_libdir}/lua
 %dir %{_datadir}/lua
 %{_mandir}/man1/*
@@ -106,6 +109,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc COPYRIGHT HISTORY refman.ps.gz doc test
+%{_libdir}/lib*.so
 %{_includedir}/*
 
 %files static
