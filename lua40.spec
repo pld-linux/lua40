@@ -8,8 +8,6 @@ License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/%{name}-%{version}.tar.gz
 Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
-Source2:	http://www.xtgsystems.com/lua/%{name}loadlib_20010802.src.zip
-Patch0:		%{name}-loadlib-require.patch
 Patch1:		%{name}-OPT.patch
 URL:		http://www.lua.org/
 BuildRequires:	unzip
@@ -68,8 +66,6 @@ Biblioteki statyczne Lua.
 %prep
 %setup -q 
 cp -f %{SOURCE1} refman.ps.gz
-unzip -q -n %{SOURCE2}
-mv -f src/loadlib.* src/lib
 
 %patch0 -p1
 %patch1 -p1
@@ -92,7 +88,6 @@ install -d $RPM_BUILD_ROOT{%{_libdir}/lua,%{_datadir}/lua}
 	INSTALL_MAN=$RPM_BUILD_ROOT%{_mandir}/man1
 
 rm -f doc/*.1
-mv -f Readme README.loadlib
 
 %clean
 rm -rf $RPM_BUILD_ROOT
