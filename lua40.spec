@@ -10,7 +10,6 @@ Source0:	http://www.lua.org/ftp/%{name}-%{version}.tar.gz
 Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
 Patch1:		%{name}-OPT.patch
 URL:		http://www.lua.org/
-BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
