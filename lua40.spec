@@ -4,7 +4,7 @@ Summary(pl):	Prosty, lekki ale potê¿ny, osadzalny jêzyk programowania
 Summary(pt_BR):	Lua é uma linguagem de programação poderosa e leve, projetada para estender aplicações.
 Name:		lua40
 Version:	4.0.1
-Release:	8
+Release:	9
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
@@ -73,7 +73,6 @@ Summary(pt_BR):	Arquivos de cabeçalho para a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-libs = %{version}
 Provides:	lua-devel = %{version}
-Obsoletes:	lua-devel
 
 %description devel
 Header files needed to embed Lua in C/C++ programs and docs for the
@@ -94,7 +93,6 @@ Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento com a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}
 Provides:	lua-static = %{version}
-Obsoletes:	lua-static
 
 %description static
 Static Lua libraries.
@@ -125,13 +123,22 @@ install -d $RPM_BUILD_ROOT{%{_libdir}/lua,%{_datadir}/lua}
 %{__make} install \
 	INSTALL_ROOT=$RPM_BUILD_ROOT%{_prefix} \
 	INSTALL_BIN=$RPM_BUILD_ROOT%{_bindir} \
-	INSTALL_INC=$RPM_BUILD_ROOT%{_includedir} \
+	INSTALL_INC=$RPM_BUILD_ROOT%{_includedir}/lua40 \
 	INSTALL_LIB=$RPM_BUILD_ROOT%{_libdir} \
 	INSTALL_MAN=$RPM_BUILD_ROOT%{_mandir}/man1
 
+# change name from lua to lua40
+for i in $RPM_BUILD_ROOT%{_bindir}/* ; do mv $i{,40} ; done
+mv $RPM_BUILD_ROOT%{_libdir}/liblua{,40}.a
+mv $RPM_BUILD_ROOT%{_libdir}/liblua{,40}.so.4.0
+mv $RPM_BUILD_ROOT%{_libdir}/liblualib{,40}.a
+mv $RPM_BUILD_ROOT%{_libdir}/liblualib{,40}.so.4.0
+mv $RPM_BUILD_ROOT%{_mandir}/man1/lua{,40}.1
+mv $RPM_BUILD_ROOT%{_mandir}/man1/luac{,40}.1
+
 rm $RPM_BUILD_ROOT%{_libdir}/lib*.so
-ln -s liblua.so.4.0 $RPM_BUILD_ROOT%{_libdir}/liblua.so
-ln -s liblualib.so.4.0 $RPM_BUILD_ROOT%{_libdir}/liblualib.so
+ln -s liblua40.so.4.0 $RPM_BUILD_ROOT%{_libdir}/liblua40.so
+ln -s liblualib40.so.4.0 $RPM_BUILD_ROOT%{_libdir}/liblualib40.so
 rm -f doc/*.1
 
 %clean
