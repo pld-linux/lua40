@@ -1,14 +1,14 @@
 %define _refman_version 4.0
 Summary:	A simple lightweight powerful embeddable programming language
 Summary(pl):	Prosty, lekki ale potê¿ny, osadzalny jêzyk programowania
-Name:		lua
+Name:		lua40
 Version:	4.0.1
-Release:	2
+Release:	3
 License:	BSD-like (see docs)
 Group:		Development/Languages
-Source0:	http://www.lua.org/ftp/%{name}-%{version}.tar.gz
+Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
 Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
-Patch1:		%{name}-OPT.patch
+Patch1:		lua-OPT.patch
 URL:		http://www.lua.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -63,7 +63,7 @@ Static Lua libraries.
 Biblioteki statyczne Lua.
 
 %prep
-%setup -q 
+%setup -q -n lua-%{version}
 cp -f %{SOURCE1} refman.ps.gz
 
 #%patch0 -p1
