@@ -1,0 +1,2 @@
+- removed patches since current lua now has its own implementation of DLL and require();
+- Not Finished Yet
