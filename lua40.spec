@@ -8,7 +8,7 @@ License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
 Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
-Patch0:		lua-link.patch
+#Patch0:		lua-link.patch
 Patch1:		lua-OPT.patch
 URL:		http://www.lua.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -73,7 +73,7 @@ Biblioteki statyczne Lua.
 %setup -q -n lua-%{version}
 cp -f %{SOURCE1} refman.ps.gz
 
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
 
 %build
