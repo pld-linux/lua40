@@ -3,15 +3,16 @@ Summary:	A simple lightweight powerful embeddable programming language
 Summary(pl):	Prosty, lekki ale potê¿ny, osadzalny jêzyk programowania
 Name:		lua40
 Version:	4.0.1
-Release:	4
+Release:	5
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
 Source1:	http://www.lua.org/ftp/refman-%{_refman_version}.ps.gz
+Patch0:		lua-link.patch
 Patch1:		lua-OPT.patch
 URL:		http://www.lua.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Provides:	lua
+Provides:	lua = %{version}
 Obsoletes:	lua
 
 %description
@@ -43,7 +44,7 @@ Summary:	Header files for Lua
 Summary(pl):	Pliki nag³ówkowe dla Lua
 Group:		Development/Languages
 Requires:	%{name} = %{version}
-Provides:	lua-devel
+Provides:	lua-devel = %{version}
 Obsoletes:	lua-devel
 
 %description devel
@@ -59,7 +60,7 @@ Summary:	Static Lua libraries Lua
 Summary(pl):	Biblioteki statyczne Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}
-Provides:	lua-static
+Provides:	lua-static = %{version}
 Obsoletes:	lua-static
 
 %description static
@@ -72,7 +73,7 @@ Biblioteki statyczne Lua.
 %setup -q -n lua-%{version}
 cp -f %{SOURCE1} refman.ps.gz
 
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
 
 %build
@@ -105,14 +106,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT README
+%doc COPYRIGHT HISTORY README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 %{_mandir}/man1/*
 
 %files devel
 %defattr(644,root,root,755)
-%doc COPYRIGHT HISTORY refman.ps.gz doc test
+%doc refman.ps.gz doc test
 %{_libdir}/lib*.so
 %{_includedir}/*
 
