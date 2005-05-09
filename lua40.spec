@@ -16,7 +16,7 @@ Patch1:		lua-OPT.patch
 URL:		http://www.lua.org/
 Requires:	%{name}-libs = %{version}-%{release}
 Provides:	lua = %{version}
-Obsoletes:	lua < 4.0.1
+Obsoletes:	lua <= 4.0.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -73,6 +73,7 @@ Summary(pt_BR):	Arquivos de cabeçalho para a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-libs = %{version}-%{release}
 Provides:	lua-devel = %{version}
+Obsoletes:	lua-devel <= 4.0.1
 
 %description devel
 Header files needed to embed Lua in C/C++ programs and docs for the
@@ -93,6 +94,7 @@ Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento com a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	lua-static = %{version}
+Obsoletes:	lua-static <= 4.0.1
 
 %description static
 Static Lua libraries.
@@ -111,9 +113,10 @@ cp -f %{SOURCE1} refman.ps.gz
 %patch1 -p1
 
 %build
-%{__make} OPT="%{rpmcflags}" \
-          EXTRA_DEFS="-fPIC -DPIC -D_GNU_SOURCE" \
-	  all so sobin
+%{__make} all so sobin \
+	OPT="%{rpmcflags}" \
+	EXTRA_DEFS="-fPIC -DPIC -D_GNU_SOURCE"
+
 rm -f test/{lua,luac}
 
 %install
