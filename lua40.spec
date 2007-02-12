@@ -1,7 +1,7 @@
 %define _refman_version 4.0
 Summary:	A simple lightweight powerful embeddable programming language
-Summary(pl):	Prosty, lekki ale potê¿ny, osadzalny jêzyk programowania
-Summary(pt_BR):	Lua é uma linguagem de programação poderosa e leve, projetada para estender aplicações.
+Summary(pl.UTF-8):   Prosty, lekki ale potÄ™Å¼ny, osadzalny jÄ™zyk programowania
+Summary(pt_BR.UTF-8):   Lua Ã© uma linguagem de programaÃ§Ã£o poderosa e leve, projetada para estender aplicaÃ§Ãµes.
 Name:		lua40
 Version:	4.0.1
 Release:	10
@@ -31,45 +31,45 @@ configuration, scripting, and rapid prototyping.
 
 This version has compiled in support for dynamic libraries in baselib.
 
-%description -l pl
-Lua to jêzyk programowania o du¿ych mo¿liwo¶ciach ale lekki,
-przeznaczony do rozszerzania aplikacji. Jest te¿ czêsto u¿ywany jako
-samodzielny jêzyk ogólnego przeznaczenia. £±czy prost± proceduraln±
-sk³adniê (podobn± do Pascala) z potê¿nymi konstrukcjami opisu danych
-bazuj±cymi na tablicach asocjacyjnych i rozszerzalnej sk³adni. Lua ma
-dynamiczny system typów, interpretowany z bytecodu i automatyczne
-zarz±dzanie pamiêci± z od¶miecaczem, co czyni go idealnym do
-konfiguracji, skryptów i szybkich prototypów.
+%description -l pl.UTF-8
+Lua to jÄ™zyk programowania o duÅ¼ych moÅ¼liwoÅ›ciach ale lekki,
+przeznaczony do rozszerzania aplikacji. Jest teÅ¼ czÄ™sto uÅ¼ywany jako
+samodzielny jÄ™zyk ogÃ³lnego przeznaczenia. ÅÄ…czy prostÄ… proceduralnÄ…
+skÅ‚adniÄ™ (podobnÄ… do Pascala) z potÄ™Å¼nymi konstrukcjami opisu danych
+bazujÄ…cymi na tablicach asocjacyjnych i rozszerzalnej skÅ‚adni. Lua ma
+dynamiczny system typÃ³w, interpretowany z bytecodu i automatyczne
+zarzÄ…dzanie pamiÄ™ciÄ… z odÅ›miecaczem, co czyni go idealnym do
+konfiguracji, skryptÃ³w i szybkich prototypÃ³w.
 
-Ta wersja ma wkompilowan± obs³ugê ³adowania dynamicznych bibliotek.
+Ta wersja ma wkompilowanÄ… obsÅ‚ugÄ™ Å‚adowania dynamicznych bibliotek.
 
-%description -l pt_BR
-Lua é uma linguagem de programação poderosa e leve, projetada para estender
-aplicações. Lua também é freqüentemente usada como uma linguagem de propósito
+%description -l pt_BR.UTF-8
+Lua Ã© uma linguagem de programaÃ§Ã£o poderosa e leve, projetada para estender
+aplicaÃ§Ãµes. Lua tambÃ©m Ã© freqÃ¼entemente usada como uma linguagem de propÃ³sito
 geral.
-Lua combina programação procedural com poderosas construções para descrição
-de dados, baseadas em tabelas associativas e semântica extensível. Lua é
+Lua combina programaÃ§Ã£o procedural com poderosas construÃ§Ãµes para descriÃ§Ã£o
+de dados, baseadas em tabelas associativas e semÃ¢ntica extensÃ­vel. Lua Ã©
 tipada dinamicamente, interpretada a partir de bytecodes, e tem gerenciamento
-automático de memória com coleta de lixo. Essas características fazem de Lua
-uma linguagem ideal para configuração, automação (scripting) e prototipagem
-rápida.
+automÃ¡tico de memÃ³ria com coleta de lixo. Essas caracterÃ­sticas fazem de Lua
+uma linguagem ideal para configuraÃ§Ã£o, automaÃ§Ã£o (scripting) e prototipagem
+rÃ¡pida.
 
 %package libs
 Summary:	lua 4.0.x libraries
-Summary(pl):	Biblioteki lua 4.0.x
+Summary(pl.UTF-8):   Biblioteki lua 4.0.x
 Group:		Development/Languages
 Conflicts:	lua40 < 4.0.1-7
 
 %description libs
 lua 4.0.x libraries.
 
-%description libs -l pl
+%description libs -l pl.UTF-8
 Biblioteki lua 4.0.x.
 
 %package devel
 Summary:	Header files for Lua
-Summary(pl):	Pliki nag³ówkowe dla Lua
-Summary(pt_BR):	Arquivos de cabeçalho para a linguagem Lua
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe dla Lua
+Summary(pt_BR.UTF-8):   Arquivos de cabeÃ§alho para a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-libs = %{version}-%{release}
 Provides:	lua-devel = %{version}
@@ -79,18 +79,18 @@ Obsoletes:	lua-devel <= 4.0.1
 Header files needed to embed Lua in C/C++ programs and docs for the
 language.
 
-%description devel -l pl
-Pliki nag³ówkowe potrzebne do w³±czenia Lua do programów w C/C++ oraz
-dokumentacja samego jêzyka.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe potrzebne do wÅ‚Ä…czenia Lua do programÃ³w w C/C++ oraz
+dokumentacja samego jÄ™zyka.
 
-%description devel -l pt_BR
-Contém os arquivos de cabeçalho para desenvolvimento e
-extensão da linguagem Lua.
+%description devel -l pt_BR.UTF-8
+ContÃ©m os arquivos de cabeÃ§alho para desenvolvimento e
+extensÃ£o da linguagem Lua.
 
 %package static
 Summary:	Static Lua libraries Lua
-Summary(pl):	Biblioteki statyczne Lua
-Summary(pt_BR):	Bibliotecas estáticas para desenvolvimento com a linguagem Lua
+Summary(pl.UTF-8):   Biblioteki statyczne Lua
+Summary(pt_BR.UTF-8):   Bibliotecas estÃ¡ticas para desenvolvimento com a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	lua-static = %{version}
@@ -99,11 +99,11 @@ Obsoletes:	lua-static <= 4.0.1
 %description static
 Static Lua libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne Lua.
 
-%description static -l pt_BR
-Bibliotecas estáticas para desenvolvimento com a linguagem Lua
+%description static -l pt_BR.UTF-8
+Bibliotecas estÃ¡ticas para desenvolvimento com a linguagem Lua
 
 %prep
 %setup -q -n lua-%{version}
