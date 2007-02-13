@@ -1,7 +1,7 @@
 %define _refman_version 4.0
 Summary:	A simple lightweight powerful embeddable programming language
-Summary(pl.UTF-8):   Prosty, lekki ale potężny, osadzalny język programowania
-Summary(pt_BR.UTF-8):   Lua é uma linguagem de programação poderosa e leve, projetada para estender aplicações.
+Summary(pl.UTF-8):	Prosty, lekki ale potężny, osadzalny język programowania
+Summary(pt_BR.UTF-8):	Lua é uma linguagem de programação poderosa e leve, projetada para estender aplicações.
 Name:		lua40
 Version:	4.0.1
 Release:	10
@@ -56,7 +56,7 @@ rápida.
 
 %package libs
 Summary:	lua 4.0.x libraries
-Summary(pl.UTF-8):   Biblioteki lua 4.0.x
+Summary(pl.UTF-8):	Biblioteki lua 4.0.x
 Group:		Development/Languages
 Conflicts:	lua40 < 4.0.1-7
 
@@ -68,8 +68,8 @@ Biblioteki lua 4.0.x.
 
 %package devel
 Summary:	Header files for Lua
-Summary(pl.UTF-8):   Pliki nagłówkowe dla Lua
-Summary(pt_BR.UTF-8):   Arquivos de cabeçalho para a linguagem Lua
+Summary(pl.UTF-8):	Pliki nagłówkowe dla Lua
+Summary(pt_BR.UTF-8):	Arquivos de cabeçalho para a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-libs = %{version}-%{release}
 Provides:	lua-devel = %{version}
@@ -89,8 +89,8 @@ extensão da linguagem Lua.
 
 %package static
 Summary:	Static Lua libraries Lua
-Summary(pl.UTF-8):   Biblioteki statyczne Lua
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento com a linguagem Lua
+Summary(pl.UTF-8):	Biblioteki statyczne Lua
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	lua-static = %{version}
