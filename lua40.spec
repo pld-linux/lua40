@@ -4,7 +4,7 @@ Summary(pl.UTF-8):	Prosty, lekki ale potężny, osadzalny język programowania
 Summary(pt_BR.UTF-8):	Lua é uma linguagem de programação poderosa e leve, projetada para estender aplicações.
 Name:		lua40
 Version:	4.0.1
-Release:	10
+Release:	11
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
