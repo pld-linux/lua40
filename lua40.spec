@@ -57,7 +57,7 @@ rápida.
 %package libs
 Summary:	lua 4.0.x libraries
 Summary(pl.UTF-8):	Biblioteki lua 4.0.x
-Group:		Development/Languages
+Group:		Libraries
 Conflicts:	lua40 < 4.0.1-7
 
 %description libs
