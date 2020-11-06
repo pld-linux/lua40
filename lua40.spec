@@ -8,7 +8,7 @@ Summary(pt_BR.UTF-8):	Lua é uma linguagem de programação poderosa e leve, pro
 Name:		lua40
 Version:	4.0.1
 %define refman_ver 4.0
-Release:	12
+Release:	13
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
@@ -78,8 +78,10 @@ Summary(pl.UTF-8):	Pliki nagłówkowe dla Lua
 Summary(pt_BR.UTF-8):	Arquivos de cabeçalho para a linguagem Lua
 Group:		Development/Languages
 Requires:	%{name}-libs = %{version}-%{release}
+%if %{with default_lua}
 Provides:	lua-devel = %{version}
 Obsoletes:	lua-devel <= 4.0.1
+%endif
 
 %description devel
 Header files needed to embed Lua in C/C++ programs and docs for the
