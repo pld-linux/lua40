@@ -119,8 +119,8 @@ Bibliotecas estáticas para desenvolvimento com a linguagem Lua.
 %setup -q -n lua-%{version}
 cp -f %{SOURCE1} refman.ps.gz
 
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %{__make} -j1 all so sobin \
