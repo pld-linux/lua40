@@ -8,7 +8,7 @@ Summary(pt_BR.UTF-8):	Lua é uma linguagem de programação poderosa e leve, pro
 Name:		lua40
 Version:	4.0.1
 %define refman_ver 4.0
-Release:	13
+Release:	14
 License:	BSD-like (see docs)
 Group:		Development/Languages
 Source0:	http://www.lua.org/ftp/lua-%{version}.tar.gz
